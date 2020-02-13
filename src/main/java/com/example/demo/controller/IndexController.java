@@ -6,6 +6,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(){
         return "index";
+
     }
     @GetMapping("/1")
     public String hello(){
