@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 接口映射 -->
+<mapper namespace="com.example.demo.Config.mapper.userMapper">
+    <insert id="insertUser">
+        insert into user (name,accountID,token,gmt_Create,gmt_modified,avatar_url)
+        values (#{name},#{accountID},#{token},#{gmt_Create},#{gmt_modified},#{avatar_url})
+    </insert>
+    <select id="findUserByToken" resultType="com.example.demo.daoPOJO.User">
+        select * from user where token = #{token}
+    </select>
+    <select id="findById" resultType="com.example.demo.daoPOJO.User">
+        select * from user where id = #{id}
+    </select>
+</mapper>
