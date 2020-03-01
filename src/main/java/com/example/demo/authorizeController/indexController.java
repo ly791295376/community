@@ -1,15 +1,18 @@
 package com.example.demo.authorizeController;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.example.demo.Config.mapper.QuestionMapper;
 import com.example.demo.Config.mapper.userMapper;
+import com.example.demo.daoPOJO.Question;
 import com.example.demo.daoPOJO.User;
 import com.example.demo.dto.QuestionDTO;
-import com.example.demo.service.questionService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +26,8 @@ public class indexController {
     private com.example.demo.service.questionService questionService;
     @GetMapping("/")
     public String index(HttpServletRequest request,
+                        @RequestParam(defaultValue = "1") int pageNum,
+                        @RequestParam(defaultValue = "5") int pageSize,
                         Model model) {
         /*
             通过用户第一次登录时随机生成的UUID放入到cookie当中，
@@ -45,12 +50,10 @@ public class indexController {
             }
         }
         /*
-            拿取列表信息
+            分页并将question转化为questionDTO（有用户属性）
          */
-        List<QuestionDTO> questionDTOList = questionService.list();
-        System.out.println(questionDTOList);
-        model.addAttribute("questions",questionDTOList);
-
+        List<QuestionDTO>  userList= questionService.pagelist(pageNum,pageSize,model);
+        model.addAttribute("questions",userList);
         return "index";
     }
 }

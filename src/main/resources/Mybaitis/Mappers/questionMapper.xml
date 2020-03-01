@@ -11,5 +11,7 @@
     <select id="list" resultType="com.example.demo.daoPOJO.Question" parameterType="java.util.List">
         select * from question
     </select>
-
+    <select id="listPage" resultType="com.example.demo.daoPOJO.Question" parameterType="com.github.pagehelper.Page">
+        select * from question
+    </select>
 </mapper>

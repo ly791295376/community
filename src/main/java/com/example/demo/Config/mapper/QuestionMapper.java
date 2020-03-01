@@ -1,6 +1,7 @@
 package com.example.demo.Config.mapper;
 
 import com.example.demo.daoPOJO.Question;
+import com.github.pagehelper.Page;
 
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface QuestionMapper {
       void create(Question question);
 
       List<Question> list();
+      Page<Question> listPage();
 //    long countByExample(QuestionExample example);
 //
 //    int deleteByExample(QuestionExample example);

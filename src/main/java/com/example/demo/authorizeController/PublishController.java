@@ -1,5 +1,6 @@
 package com.example.demo.authorizeController;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.demo.Config.mapper.QuestionMapper;
 import com.example.demo.Config.mapper.userMapper;
 import com.example.demo.daoPOJO.Question;
@@ -77,6 +78,7 @@ public class PublishController {
                 String token =  cookie.getValue();
                 user = userMapper.findUserByToken(token);
                 if (user != null) {
+                    System.out.println("------user的存储："+user);
                     request.getSession().setAttribute("user",user);
                 }
                 break;
